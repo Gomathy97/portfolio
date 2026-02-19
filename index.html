@@ -927,6 +927,88 @@
       fill: currentColor;
     }
 
+    /* ---- SCROLL PROGRESS BAR ---- */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--teal), var(--accent-light));
+      width: 0%;
+      z-index: 1001;
+      transition: width 0.05s linear;
+      border-radius: 0 2px 2px 0;
+      box-shadow: 0 0 10px var(--accent), 0 0 5px var(--teal);
+    }
+
+    /* ---- MOUSE GLOW ---- */
+    .mouse-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108, 99, 255, 0.07), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s;
+      opacity: 0;
+    }
+    .mouse-glow.visible { opacity: 1; }
+
+    /* ---- GRADIENT SECTION TITLES ---- */
+    .section-title {
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent-light) 50%, var(--teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ---- 3D CARD TILT ---- */
+    .tilt-card {
+      transform-style: preserve-3d;
+      perspective: 800px;
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 30px rgba(108, 99, 255, 0.08);
+    }
+
+    /* ---- CONTACT CTA PANEL ---- */
+    .contact-cta-panel {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3.5rem 3rem;
+      background:
+        linear-gradient(135deg, rgba(108, 99, 255, 0.08), rgba(45, 212, 191, 0.06), rgba(244, 114, 182, 0.04));
+      border: 1px solid rgba(108, 99, 255, 0.2);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-cta-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--teal), var(--rose));
+      border-radius: 20px 20px 0 0;
+    }
+    .contact-cta-panel .section-title {
+      margin-bottom: 0.75rem;
+    }
+    .contact-cta-panel p {
+      color: var(--text-muted);
+      max-width: 450px;
+      margin: 0 auto 2rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
     /* ---- FOOTER ---- */
     footer {
       text-align: center;
@@ -1030,6 +1112,12 @@
 </head>
 <body>
 
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- MOUSE GLOW -->
+  <div class="mouse-glow" id="mouseGlow"></div>
+
   <!-- NAV -->
   <nav id="navbar">
     <div class="nav-inner">
@@ -1131,28 +1219,28 @@
         <p>When I'm not shipping code, you'll find me solving DSA problems, building side projects, or mentoring fellow engineers.</p>
       </div>
       <div class="about-highlights reveal reveal-delay-2">
-        <div class="highlight-card">
+        <div class="highlight-card tilt-card">
           <div class="highlight-icon" style="background: var(--accent-glow); color: var(--accent-light);">&#9889;</div>
           <div>
             <h4>AI Platform Builder</h4>
             <p>Architected Voyager AI — migrated 142 services in 14 days, automating ~500 hours of work</p>
           </div>
         </div>
-        <div class="highlight-card">
+        <div class="highlight-card tilt-card">
           <div class="highlight-icon" style="background: var(--teal-glow); color: var(--teal);">&#9881;</div>
           <div>
             <h4>Systems Architect</h4>
             <p>Redesigned subscription lifecycles using Temporal + Saga patterns, cutting SLA by 40%</p>
           </div>
         </div>
-        <div class="highlight-card">
+        <div class="highlight-card tilt-card">
           <div class="highlight-icon" style="background: rgba(251, 191, 36, 0.12); color: var(--amber);">&#9733;</div>
           <div>
             <h4>Team Leader</h4>
             <p>Led 5 engineers to build an AI oncall assistant reducing debugging time by 30%</p>
           </div>
         </div>
-        <div class="highlight-card">
+        <div class="highlight-card tilt-card">
           <div class="highlight-icon" style="background: rgba(244, 114, 182, 0.12); color: var(--rose);">&#128640;</div>
           <div>
             <h4>Revenue Driver</h4>
@@ -1291,7 +1379,7 @@
       <div class="section-divider"></div>
     </div>
     <div class="skills-grid">
-      <div class="skill-category reveal">
+      <div class="skill-category tilt-card reveal">
         <h3>Languages</h3>
         <div class="skill-tags">
           <span class="skill-tag">Java</span>
@@ -1299,7 +1387,7 @@
           <span class="skill-tag">Go</span>
         </div>
       </div>
-      <div class="skill-category reveal reveal-delay-1">
+      <div class="skill-category tilt-card reveal reveal-delay-1">
         <h3>Backends &amp; Frameworks</h3>
         <div class="skill-tags">
           <span class="skill-tag">Spring Boot</span>
@@ -1309,7 +1397,7 @@
           <span class="skill-tag">Distributed Systems</span>
         </div>
       </div>
-      <div class="skill-category reveal reveal-delay-2">
+      <div class="skill-category tilt-card reveal reveal-delay-2">
         <h3>Databases</h3>
         <div class="skill-tags">
           <span class="skill-tag">SQL</span>
@@ -1317,14 +1405,14 @@
           <span class="skill-tag">Redis</span>
         </div>
       </div>
-      <div class="skill-category reveal reveal-delay-3">
+      <div class="skill-category tilt-card reveal reveal-delay-3">
         <h3>Messaging &amp; Streaming</h3>
         <div class="skill-tags">
           <span class="skill-tag">Kafka</span>
           <span class="skill-tag">Pulsar</span>
         </div>
       </div>
-      <div class="skill-category reveal">
+      <div class="skill-category tilt-card reveal">
         <h3>DevOps &amp; Cloud</h3>
         <div class="skill-tags">
           <span class="skill-tag">Git</span>
@@ -1338,7 +1426,7 @@
           <span class="skill-tag">ECS</span>
         </div>
       </div>
-      <div class="skill-category reveal reveal-delay-1">
+      <div class="skill-category tilt-card reveal reveal-delay-1">
         <h3>AI &amp; Automation</h3>
         <div class="skill-tags">
           <span class="skill-tag">LangChain</span>
@@ -1347,7 +1435,7 @@
           <span class="skill-tag">Transformation Pipelines</span>
         </div>
       </div>
-      <div class="skill-category reveal reveal-delay-2">
+      <div class="skill-category tilt-card reveal reveal-delay-2">
         <h3>Architectural Patterns</h3>
         <div class="skill-tags">
           <span class="skill-tag">Saga</span>
@@ -1366,7 +1454,7 @@
       <div class="section-divider"></div>
     </div>
     <div class="projects-grid">
-      <div class="project-card reveal">
+      <div class="project-card tilt-card reveal">
         <div class="project-icon" style="background: var(--accent-glow); color: var(--accent-light);">&#127922;</div>
         <span class="project-badge badge-live">LIVE</span>
         <h3>Board Games Hive</h3>
@@ -1382,7 +1470,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
         </a>
       </div>
-      <div class="project-card reveal reveal-delay-1">
+      <div class="project-card tilt-card reveal reveal-delay-1">
         <div class="project-icon" style="background: rgba(251, 191, 36, 0.12); color: var(--amber);">&#128176;</div>
         <span class="project-badge badge-wip">IN PROGRESS</span>
         <h3>Shared Wallet</h3>
@@ -1394,7 +1482,7 @@
           <span class="project-tech">Docker</span>
         </div>
       </div>
-      <div class="project-card reveal reveal-delay-2">
+      <div class="project-card tilt-card reveal reveal-delay-2">
         <div class="project-icon" style="background: var(--teal-glow); color: var(--teal);">&#129302;</div>
         <span class="project-badge badge-completed">COMPLETED</span>
         <h3>GPU Fault Tolerance</h3>
@@ -1405,7 +1493,7 @@
           <span class="project-tech">Deep Learning</span>
         </div>
       </div>
-      <div class="project-card reveal reveal-delay-3">
+      <div class="project-card tilt-card reveal reveal-delay-3">
         <div class="project-icon" style="background: rgba(244, 114, 182, 0.12); color: var(--rose);">&#129504;</div>
         <span class="project-badge badge-completed">COMPLETED</span>
         <h3>AI Stress Management</h3>
@@ -1488,15 +1576,14 @@
 
   <!-- CONTACT -->
   <section id="contact" class="contact-section">
-    <div class="section-header reveal">
-      <div class="section-label">Contact</div>
-      <h2 class="section-title">Let's connect</h2>
-      <div class="section-divider"></div>
-    </div>
-    <p class="reveal reveal-delay-1" style="color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; font-size: 1.05rem;">
-      I'm always interested in hearing about new opportunities, collaborations, or just chatting about tech.
-    </p>
-    <div class="contact-links reveal reveal-delay-2">
+    <div class="contact-cta-panel reveal">
+      <div class="section-label" style="text-align:center;">Contact</div>
+      <h2 class="section-title" style="text-align:center;">Let's connect</h2>
+      <div class="section-divider" style="margin: 1rem auto;"></div>
+      <p>
+        I'm always interested in hearing about new opportunities, collaborations, or just chatting about tech.
+      </p>
+      <div class="contact-links">
       <a href="mailto:gomathy.nagarajan25@gmail.com" class="contact-link">
         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         gomathy.nagarajan25@gmail.com
@@ -1509,6 +1596,7 @@
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.68 2.35a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.74.32 1.53.55 2.35.68A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         +91 8870079228
       </a>
+    </div>
     </div>
   </section>
 
@@ -1627,7 +1715,12 @@
   // Active nav link highlighting
   const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a');
+
+  // Scroll progress bar
+  const scrollProgress = document.getElementById('scrollProgress');
+
   window.addEventListener('scroll', () => {
+    // Nav highlighting
     let current = '';
     sections.forEach(section => {
       const top = section.offsetTop - 120;
@@ -1636,7 +1729,46 @@
     navAnchors.forEach(a => {
       a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
     });
+
+    // Scroll progress
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = progress + '%';
   }, { passive: true });
+
+  // Mouse glow effect
+  const glow = document.getElementById('mouseGlow');
+  let glowVisible = false;
+  document.addEventListener('mousemove', (e) => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    if (!glowVisible) {
+      glow.classList.add('visible');
+      glowVisible = true;
+    }
+  });
+  document.addEventListener('mouseleave', () => {
+    glow.classList.remove('visible');
+    glowVisible = false;
+  });
+
+  // 3D card tilt effect
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
 </script>
 </body>
 </html>
