@@ -101,6 +101,11 @@
     }
     nav .logo span { color: var(--text-muted); font-weight: 400; }
     nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+    nav .nav-links li { margin-left: 2rem; }
+    nav .nav-links li:first-child { margin-left: 0; }
+    @supports (gap: 1rem) {
+      nav .nav-links li { margin-left: 0; }
+    }
     nav .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
@@ -151,7 +156,7 @@
     }
     .hero-bg {
       position: absolute;
-      inset: 0;
+      top: 0; right: 0; bottom: 0; left: 0;
       background:
         radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow-strong), transparent),
         radial-gradient(ellipse 60% 40% at 80% 50%, var(--teal-glow), transparent),
@@ -160,7 +165,7 @@
     }
     .hero-grid {
       position: absolute;
-      inset: 0;
+      top: 0; right: 0; bottom: 0; left: 0;
       background-image:
         linear-gradient(rgba(108, 99, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(108, 99, 255, 0.03) 1px, transparent 1px);
@@ -204,10 +209,12 @@
       line-height: 1.1;
       letter-spacing: -2px;
       margin-bottom: 1.5rem;
+      color: var(--text);
       background: linear-gradient(135deg, var(--text) 0%, var(--text-muted) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      color: transparent;
     }
     .hero h1 em {
       font-style: italic;
@@ -215,6 +222,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      color: transparent;
     }
     .hero-subtitle {
       font-size: 1.15rem;
@@ -229,6 +237,10 @@
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
+    }
+    .hero-actions .btn { margin: 0.5rem; }
+    @supports (gap: 1rem) {
+      .hero-actions .btn { margin: 0; }
     }
     .btn {
       display: inline-flex;
@@ -282,6 +294,10 @@
       margin-top: 4rem;
       padding-top: 2.5rem;
       border-top: 1px solid var(--border);
+    }
+    .hero-stat { margin: 0 1.5rem; }
+    @supports (gap: 1rem) {
+      .hero-stat { margin: 0; }
     }
     .hero-stat {
       text-align: center;
@@ -901,6 +917,10 @@
       flex-wrap: wrap;
       margin-top: 1rem;
     }
+    .contact-link { margin: 0.75rem; }
+    @supports (gap: 1rem) {
+      .contact-link { margin: 0; }
+    }
     .contact-link {
       display: inline-flex;
       align-items: center;
@@ -962,6 +982,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      color: transparent;
     }
 
     /* ---- 3D CARD TILT ---- */
@@ -1166,6 +1187,30 @@
       .impact-strip-inner { gap: 1rem; }
       .impact-divider { display: none; }
       .impact-item { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+      .hero-content > * {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+      .particle {
+        display: none;
+      }
+      .mouse-glow {
+        display: none;
+      }
     }
   </style>
 </head>
